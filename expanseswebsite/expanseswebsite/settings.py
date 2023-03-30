@@ -82,9 +82,10 @@ WSGI_APPLICATION = 'expanseswebsite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
+        
         'ENGINE': 'django.db.backends.postgresql',
         # 'NAME': 'income_expanse',
         # 'USER': 'postgres',
@@ -94,6 +95,12 @@ DATABASES = {
         'USER': env('DB_USER'),
         'HOST': env('DB_HOST'),
         'PASSWORD': env('DB_PASSWORD'),
+        '''
+import dj_database_url
+
+DATABASES = {
+    'default' : dj_database_url.parse(env('DATABASE_URL'))
+}
 
     }
 }
