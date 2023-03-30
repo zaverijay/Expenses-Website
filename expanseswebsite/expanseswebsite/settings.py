@@ -84,30 +84,26 @@ WSGI_APPLICATION = 'expanseswebsite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 '''
 DATABASES = {
     'default': {
+        
         'ENGINE': 'django.db.backends.postgresql',
         # 'NAME': 'income_expanse',
         # 'USER': 'postgres',
         # 'HOST': 'localhost',
         # 'PASSWORD': 'zaveri',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-
-    }
-}
-'''
-
-
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'HOST': env('DB_HOST'),
+        'PASSWORD': env('DB_PASSWORD'),
+        '''
 import dj_database_url
 
 DATABASES = {
     'default' : dj_database_url.parse(env('DATABASE_URL'))
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
