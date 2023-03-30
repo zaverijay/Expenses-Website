@@ -13,7 +13,12 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+
+import environ
+
+env = environ.Env()
+
+environ.Env().read_env()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,7 +34,7 @@ SECRET_KEY = 'django-insecure-kdwip+)#r($u!adducg50yh=m+%$1md7u#e%9c^1l0_si-8sut
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -85,10 +90,10 @@ DATABASES = {
         # 'USER': 'postgres',
         # 'HOST': 'localhost',
         # 'PASSWORD': 'zaveri',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'HOST': env('DB_HOST'),
+        'PASSWORD': env('DB_PASSWORD'),
 
     }
 }
@@ -138,4 +143,3 @@ STATIC_ROOTS = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-django_heroku.settings(locals())
