@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'expanses'
+    'expanses',
+    'authentication'
 ]
 
 MIDDLEWARE = [
@@ -83,8 +84,8 @@ WSGI_APPLICATION = 'expanseswebsite.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 '''
+# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 DATABASES = {
     'default': {
         
@@ -97,14 +98,16 @@ DATABASES = {
         'USER': env('DB_USER'),
         'HOST': env('DB_HOST'),
         'PASSWORD': env('DB_PASSWORD'),
-        '''
+    }
+}
+'''
+
 import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.parse(env('DATABASE_URL'))
+
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
