@@ -4,6 +4,6 @@ from . import views
 
 
 urlpatterns = [
-    path('index', views.index, name="expanses_index"),
+    path('', views.index, name="expanses"),
     path('add-expanses', views.add_expanses, name="expanses")
 ]
