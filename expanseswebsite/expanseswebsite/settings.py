@@ -11,20 +11,20 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 
+import dj_database_url
 from pathlib import Path
 import os
+import environ
+from django.contrib import messages
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-import environ
-
 env = environ.Env()
 
 environ.Env.read_env()
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -34,7 +34,7 @@ environ.Env.read_env()
 SECRET_KEY = 'django-insecure-kdwip+)#r($u!adducg50yh=m+%$1md7u#e%9c^1l0_si-8sut'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -48,8 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'expanses',
-    'authentication'
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware'
 ]
 
 ROOT_URLCONF = 'expanseswebsite.urls'
@@ -102,7 +104,6 @@ DATABASES = {
 }
 '''
 
-import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.parse(env('DATABASE_URL'))
@@ -151,4 +152,16 @@ STATIC_ROOTS = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
 
+# email module
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_USE_TLS = True
+DEFAULT_EMAIL_FROM = os.environ.get('DEFAULT_EMAIL_FROM')
+EMAIL_PORT = 587
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+SITE_ID = 2

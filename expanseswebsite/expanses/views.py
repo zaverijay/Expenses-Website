@@ -1,9 +1,11 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required(login_url='/authentication/login')
 def index(request):
     return render(request, 'expanses/index.html')
 
-def add_expanses(request):
+def add_expense(request):
     return render(request, 'expanses/add_expanse.html')
 
